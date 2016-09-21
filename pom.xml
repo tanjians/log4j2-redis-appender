@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.tan</groupId>
+    <artifactId>log4j2-redis-appender</artifactId>
+    <version>1.0.0</version>
+    <packaging>bundle</packaging>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.ops4j.pax.logging</groupId>
+            <artifactId>pax-logging-log4j2</artifactId>
+            <version>1.8.5</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-Vendor>tongtech</Bundle-Vendor>
+                        <Bundle-SymbolicName>com.tan.log4j2.redis.appender</Bundle-SymbolicName>
+                        <Bundle-Name>com.tan.log4j2.redis.appender</Bundle-Name>
+                        <Bundle-Version>1.0.0</Bundle-Version>
+                        <Embed-Dependency>
+                            *;scope=compile|runtime|provided;
+                            inline=false;
+                            type=!pom;artifactId=!org.eclipse.osgi|msf4j-core|slf4j-api|javax.ws.rs-api|spring-test|junit
+                        </Embed-Dependency>
+                        <Import-Package>
+                            org.apache.log4j.*;version="[2.5.0,3.0.0)"
+                        </Import-Package>
+                        <Export-Package>
+                            com.tan.log4j2.appender;version="1.0.0"
+                        </Export-Package>
+                        <Fragment-Host>org.ops4j.pax.logging.pax-logging-log4j2</Fragment-Host>
+                        <DynamicImport-Package>*</DynamicImport-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
